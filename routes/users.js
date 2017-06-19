@@ -10,8 +10,16 @@ router.route('/')
         response.send('teste');
     })
     .post(parseJson, (request, response) => {
-        let user = new User({ name: request.body.name });
-        response.status(201).json('OK, ' + JSON.stringify(request.body));
+        let user = new User({ name: request.headers.name });
+        user.save((error) => {
+            if (error) {
+                console.log(error);
+                response.status(500).json('error: ' + JSON.stringify(error));
+            } else {
+                response.status(201).json('OK, ' + JSON.stringify(request.headers));
+
+            }
+        });
     });
 
 module.exports = router;

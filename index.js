@@ -31,4 +31,4 @@ app.listen(3000, () => {
     console.log('listening on 3000');
 })
 
-//curl -H "Content-Type: application/jso}' http://localhost:3000/user
+//curl -H "Content-Type: application/json" -X POST -d '{}' http://localhost:3000/users

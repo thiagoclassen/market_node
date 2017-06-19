@@ -1,12 +1,19 @@
-const mongoose = require('mongoose');
-const Product = require('./product');
-const Client = require('./client');
+const mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    Product = require('./product').Schema,
+    Client = require('./client').Schema;
 
-const listSchema = mongoose.Schema({
+
+const listSchema = new Schema({
     client: Client,
     products: [Product],
     deliveryDate: Date,
-    total: float
+    total: Number
 });
 
-module.exports = mongoose.model('List', listSchema);
+const model = mongoose.model('List', listSchema);
+
+module.exports = {
+    Schema: listSchema,
+    Model: model
+}
