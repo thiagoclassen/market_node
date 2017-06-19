@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const List = require('./list').Schema;
+const mongoose = require('mongoose'),
+    List = require('./list').Schema;
 
 const orderSchema = mongoose.Schema({
-    lists: [List],    
+    lists: [List],
     deliveryDate: Date,
     total: Number
 });

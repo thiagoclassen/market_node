@@ -7,18 +7,17 @@ let router = express.Router();
 
 router.route('/')
     .get((request, response) => {
-        response.send('teste');
+        User.find((err, users) => {
+            if (err) console.error(err);
+            response.send('OK: ' + users);
+        });
     })
     .post(parseJson, (request, response) => {
         let user = new User({ name: request.headers.name });
         user.save((error) => {
-            if (error) {
-                console.log(error);
-                response.status(500).json('error: ' + JSON.stringify(error));
-            } else {
-                response.status(201).json('OK, ' + JSON.stringify(request.headers));
+            if (error) console.error(error);
+            response.status(201).json('OK, ' + JSON.stringify(request.headers));
 
-            }
         });
     });
 
