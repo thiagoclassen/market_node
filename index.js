@@ -17,7 +17,7 @@ db.once('open', () => {
 const clients = require('./routes/clients'),
     lists = require('./routes/lists'),
     orders = require('./routes/orders'),
-    products = require('./routes/lists'),
+    products = require('./routes/products'),
     users = require('./routes/users');
 
 app.use('/clients', clients);
