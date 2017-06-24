@@ -15,13 +15,19 @@ router.route('/')
         });
     })
     .post(parseJson, (request, response) => {
-        let client = new Client({ name: request.headers.name });
-        let products = new Product({ name: request.headers.name, type: request.headers.type });
+        let client = request.body.client;
+        let products = request.body.products;
+        let deliveryDate = request.body.deliveryDate;
+        let total = request.body.total;
 
+        console.log(client.name);
+        console.log(products);
+        console.log(deliveryDate);
+        console.log(total);
 
-        let list = new List({ name: request.headers.name });
+        let list = new List(client, products, deliveryDate, total);
 
-        response.status(201).json('OK, ' + JSON.stringify(request.body));
+        response.status(201).json('OK, ' + JSON.stringify(list));
         // list.save((error) => {
         //     if (error) console.error(error);
         //     response.status(201).json('OK, ' + JSON.stringify(request.headers));

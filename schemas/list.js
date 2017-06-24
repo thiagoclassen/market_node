@@ -5,8 +5,14 @@ const mongoose = require('mongoose'),
 
 
 const listSchema = new Schema({
-    client: Client,
-    products: [Product],
+    client: { name: String },
+    products: [{
+        name: String,
+        type: String,
+        price: Number,
+        qtd: Number,
+        total: Number
+    }],
     deliveryDate: Date,
     total: Number
 });
