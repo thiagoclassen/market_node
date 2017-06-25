@@ -9,14 +9,14 @@ router.route('/')
     .get((request, response) => {
         User.find((err, users) => {
             if (err) console.error(err);
-            response.send('OK: ' + users);
+            response.send(users);
         });
     })
     .post(parseJson, (request, response) => {
         let user = new User({ name: request.headers.name });
         user.save((error) => {
             if (error) console.error(error);
-            response.status(201).json('OK, ' + JSON.stringify(request.headers));
+            response.status(201).json('Saved, ' + JSON.stringify(request.headers));
 
         });
     });
