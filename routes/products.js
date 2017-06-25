@@ -9,14 +9,15 @@ router.route('/')
     .get((request, response) => {
         Product.find((err, products) => {
             if (err) console.error(err);
-            response.send('OK: ' + products);
+            response.send(products);
         });
     })
     .post(parseJson, (request, response) => {
-        let product = new Product({ name: request.headers.name, type: request.headers.type });
+        console.log(request.body);
+        let product = new Product({ name: request.body.name, unit: request.body.unit });
         product.save((error) => {
             if (error) console.error(error);
-            response.status(201).json('OK, ' + product);
+            response.status(201).json('Saved, ' + product);
 
         });
     });

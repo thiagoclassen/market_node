@@ -1,7 +1,5 @@
 const express = require('express'),
     List = require('../schemas/list').Model,
-    Client = require('../schemas/client').Model,
-    Product = require('../schemas/product').Model,
     bodyParser = require('body-parser'),
     parseJson = bodyParser.json();
 
@@ -11,28 +9,20 @@ router.route('/')
     .get((request, response) => {
         List.find((err, lists) => {
             if (err) console.error(err);
-            response.send('OK: ' + lists);
+            response.send(lists);
         });
     })
     .post(parseJson, (request, response) => {
-        let client = request.body.client;
-        let products = request.body.products;
-        let deliveryDate = request.body.deliveryDate;
-        let total = request.body.total;
+        let client = request.body.client,
+            products = request.body.products,
+            deliveryDate = request.body.deliveryDate,
+            total = request.body.total,
+            list = new List({ client, products, deliveryDate, total });
 
-        console.log(client.name);
-        console.log(products);
-        console.log(deliveryDate);
-        console.log(total);
-
-        let list = new List(client, products, deliveryDate, total);
-
-        response.status(201).json('OK, ' + JSON.stringify(list));
-        // list.save((error) => {
-        //     if (error) console.error(error);
-        //     response.status(201).json('OK, ' + JSON.stringify(request.headers));
-
-        // });
+        list.save((error) => {
+            if (error) console.error(error);
+            response.status(201).json('Saved, ' + JSON.stringify(request.body));
+        });
     });
 
 module.exports = router;

@@ -3,7 +3,7 @@ const mongoose = require('mongoose'),
 
 const productSchema = new Schema({
     name: String,
-    type: String
+    unit: String
 });
 
 const model = mongoose.model('Product', productSchema);

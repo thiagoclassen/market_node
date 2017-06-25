@@ -8,7 +8,7 @@ const listSchema = new Schema({
     client: { name: String },
     products: [{
         name: String,
-        type: String,
+        unitType: String,
         price: Number,
         qtd: Number,
         total: Number
