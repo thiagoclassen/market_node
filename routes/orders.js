@@ -15,12 +15,13 @@ router.route('/')
     .post(parseJson, (request, response) => {
         let lists = request.body.lists,
             deliveryDate = request.body.deliveryDate,
-            total = request.body.deliveryDate;
+            total = request.body.total;
 
         let order = new Order({ lists, deliveryDate, total });
+        console.log(order);
         order.save((error) => {
             if (error) console.error(error);
-            response.status(201).json('Saved, ' + JSON.stringify(request.body));
+            response.status(201).json();
         });
     });
 
